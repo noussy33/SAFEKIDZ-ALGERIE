@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>SafeKids – حماية أطفال الجزائر</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f0fdf4 0%, #dcfce7 100%);
+            font-family: 'Segoe UI', 'Cairo', Tahoma, sans-serif;
+            padding: 1rem;
+            min-height: 100vh;
+        }
+
+        .app-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .app-header h1 {
+            font-size: 2rem;
+            color: #166534;
+        }
+
+        .app-header p {
+            color: #15803d;
+        }
+
+        .free-badge {
+            background: #fef9c3;
+            border: 2px solid #ca8a04;
+            border-radius: 3rem;
+            padding: 0.5rem 1rem;
+            display: inline-block;
+            margin: 0.5rem auto;
+            font-weight: bold;
+            color: #854d0e;
+        }
+
+        .share-btn {
+            background: #3b82f6;
+            margin-top: 0.5rem;
+        }
+        .share-btn:hover {
+            background: #2563eb;
+        }
+
+        .grid-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .card {
+            background: #ffffffea;
+            backdrop-filter: blur(2px);
+            border-radius: 2rem;
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.15);
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+        }
+
+        .card-header {
+            background: #15803d;
+            color: white;
+            padding: 1rem 1.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        button {
+            background: #22c55e;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-weight: bold;
+            font-family: inherit;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            transition: 0.2s;
+            color: white;
+        }
+
+        button i {
+            margin-left: 0.3rem;
+        }
+
+        button:hover {
+            background: #16a34a;
+            transform: scale(0.97);
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 0.6rem;
+            border-radius: 1rem;
+            border: 1px solid #bbf7d0;
+            margin: 0.5rem 0;
+            font-family: inherit;
+        }
+
+        .warning-box {
+            background: #fee2e2;
+            border-right: 5px solid #dc2626;
+            padding: 0.7rem;
+            border-radius: 1rem;
+            margin-top: 0.8rem;
+            font-size: 0.85rem;
+            color: #991b1b;
+        }
+
+        .tip-box {
+            background: #e0f2fe;
+            border-right: 5px solid #0284c7;
+            padding: 0.7rem;
+            border-radius: 1rem;
+            margin-top: 0.8rem;
+            font-size: 0.85rem;
+        }
+
+        .scenario {
+            background: #fef9c3;
+            padding: 0.8rem;
+            border-radius: 1rem;
+            margin: 0.8rem 0;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+            color: #166534;
+        }
+
+        .emergency-btn {
+            background: #dc2626;
+            width: 100%;
+            padding: 0.8rem;
+            font-size: 1rem;
+        }
+
+        .emergency-btn:hover {
+            background: #b91c1c;
+        }
+    </style>
+</head>
+<body>
+<div class="app-header">
+    <h1><i class="fas fa-shield-alt"></i> SafeKids – حماية أطفال الجزائر</h1>
+    <div class="free-badge">
+        <i class="fas fa-gift"></i> هذا التطبيق مجاني بالكامل – نرجو توزيعه لحماية أطفالنا
+    </div>
+    <button class="share-btn" id="shareAppBtn"><i class="fas fa-share-alt"></i> شارك التطبيق مع الآخرين</button>
+</div>
+
+<div class="grid-container">
+
+    <!-- 1. تعريف الطفل بالجسم والحدود -->
+    <div class="card">
+        <div class="card-header"><i class="fas fa-child"></i> جسدي خط أحمر</div>
+        <div class="card-body">
+            <p>علّم طفلك أن جسده ملكه، ولا يحق لأي شخص لمس مناطق معينة (تحت الملابس الداخلية) إلا للأم أو الطبيب وبموافقته.</p>
+            <button id="teachBodyBtn"><i class="fas fa-play"></i> ابدأ محادثة مع طفلك (دليل)</button>
+            <div id="bodyTalkGuide" class="tip-box"></div>
+            <div class="warning-box">⚠️ "الأعضاء التناسلية والشرج والصدر مناطق خاصة – لا أحد يلمسها إلا لأسباب صحية وبعلمك."</div>
+        </div>
+    </div>
+
+    <!-- 2. علامات الخطر -->
+    <div class="card">
+        <div class="card-header"><i class="fas fa-exclamation-triangle"></i> علامات تحذيرية</div>
+        <div class="card-body">
+            <p>إذا لاحظت على طفلك أيًا من هذه العلامات، تواصل فورًا مع الجهات المختصة:</p>
+            <ul style="margin-right:1.2rem; margin-top:0.5rem;">
+                <li>🔴 نزيف أو ألم في المنطقة التناسلية أو الشرجية</li>
+                <li>🔴 كدمات غير مبررة حول الفخذين</li>
+                <li>🔴 تغير مفاجئ في السلوك (خوف، انطواء، عدوانية)</li>
+                <li>🔴 معرفة جنسية غير مناسبة لعمره</li>
+                <li>🔴 رفض الذهاب إلى مكان معين أو شخص معين</li>
+            </ul>
+            <div class="tip-box">📖 مستند من "الجرائم الجنسية والطب الشرعي"</div>
+        </div>
+    </div>
+
+    <!-- 3. إرشادات السلامة -->
+    <div class="card">
+        <div class="card-header"><i class="fas fa-home"></i> قواعد الأمان</div>
+        <div class="card-body">
+            <ul style="margin-right:1.2rem;">
+                <li>🚫 لا تترك طفلك وحيدًا مع شخص بالغ في غرفة مغلقة.</li>
+                <li>🚫 علّم طفلك أن يقول "لا" بصوت عالٍ لأي لمسة مريبة.</li>
+                <li>🚫 اشرح لطفلك الفرق بين "السر الجيد" و"السر السيئ".</li>
+                <li>🚫 تجنب إرسال الطفل إلى أماكن دون رقابة (حمامات السباحة، المخيمات).</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 4. حوارات مناسبة للعمر -->
+    <div class="card">
+        <div class="card-header"><i class="fas fa-comments"></i> كيف تجيب على أسئلته؟</div>
+        <div class="card-body">
+            <select id="questionSelect">
+                <option value="fromWhere">من أين يأتي الطفل؟</option>
+                <option value="bodyDiff">لماذا يختلف جسدي عن جسد أخي؟</option>
+                <option value="touch">ماذا أفعل إذا لمسني أحد بطريقة لا تعجبني؟</option>
+            </select>
+            <button id="showAnswerBtn"><i class="fas fa-lightbulb"></i> اعرض الإجابة</button>
+            <div id="answerBox" class="tip-box"></div>
+        </div>
+    </div>
+
+    <!-- 5. خطة النجاة للطفل -->
+    <div class="card">
+        <div class="card-header"><i class="fas fa-running"></i> خطة النجاة</div>
+        <div class="card-body">
+            <ol style="margin-right:1.5rem;">
+                <li><strong>اركض</strong> – ابتعد عن الشخص فورًا.</li>
+                <li><strong>اصرخ</strong> – "لا تلمسني!" "ساعدوني!"</li>
+                <li><strong>أخبر</strong> – ابحث عن شخص بالغ تثق به (أم، أب، معلم).</li>
+                <li><strong>كرر</strong> – استمر في الإخبار حتى يصدقك أحد.</li>
+            </ol>
+            <button id="practiceSafetyBtn"><i class="fas fa-dumbbell"></i> تمرين مع الطفل</button>
+            <div id="safetyPractice" class="tip-box"></div>
+        </div>
+    </div>
+
+    <!-- 6. سيناريوهات تفاعلية -->
+    <div class="card">
+        <div class="card-header"><i class="fas fa-gamepad"></i> سيناريوهات "ماذا لو؟"</div>
+        <div class="card-body">
+            <div id="scenarioText" class="scenario">📖 شخص بالغ يطلب منك خلع ملابسك "للعب لعبة سرية". ماذا تفعل؟</div>
+            <button id="nextScenarioBtn">سيناريو جديد</button>
+            <button id="showIdealAnswer">اعرض الإجابة المثالية</button>
+            <div id="scenarioAnswer" class="tip-box"></div>
+        </div>
+    </div>
+
+    <!-- 7. جهات التبليغ في الجزائر -->
+    <div class="card">
+        <div class="card-header"><i class="fas fa-phone-alt"></i> جهات التبليغ في الجزائر</div>
+        <div class="card-body">
+            <p>للإبلاغ عن أي حالة اشتباه أو اعتداء جنسي على طفل:</p>
+            <ul style="margin-right:1.2rem;">
+                <li>📞 <strong>الدرك الوطني</strong> – 1055</li>
+                <li>📞 <strong>الشرطة (الأمن الوطني)</strong> – 1548 أو 17 (طوارئ)</li>
+                <li>📞 <strong>الخط الأخضر لحماية الطفولة</strong> – 11-11 (مجاني، تابع لوزارة التضامن الوطني)</li>
+                <li>📞 <strong>الديوان الوطني لحماية الطفولة</strong> – 15-55</li>
+            </ul>
+            <button id="emergencyGuideBtn" class="emergency-btn"><i class="fas fa-ambulance"></i> إجراءات الطوارئ الفورية</button>
+            <div id="emergencySteps" class="warning-box"></div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <i class="fas fa-seedling"></i> تطبيق مجاني 100% – أنشره، احمِ طفلاً. مستند إلى مراجع طبية وقانونية.
+</footer>
+
+<script>
+    // 1. محادثة الجسم
+    document.getElementById("teachBodyBtn")?.addEventListener("click", () => {
+        document.getElementById("bodyTalkGuide").innerHTML = "👩‍👧 قل لطفلك: 'جسمك ملكك. هناك أماكن خاصة لا يراها ولا يلمسها إلا أنت، أو أمي وأبي عند التنظيف، أو الطبيب بحضوري. إذا شعرت بالارتباك من لمسة، قل لي فورًا.'";
+    });
+
+    // 2. أجوبة الأسئلة
+    const answers = {
+        fromWhere: "👶 الطفل ينمو في بطن أمه في مكان خاص اسمه 'الرحم'، بعد أن يجتمع بذرة من الأب مع بويضة من الأم. يخرج الطفل من قناة الولادة بعد 9 أشهر – هذا أمر طبيعي وجميل.",
+        bodyDiff: "🧒 الأولاد والبنات خلقهم الله مختلفين قليلاً في الجسم. كلاهما ثمين ومميز. الفرق الرئيسي في الأعضاء التناسلية، وكلاهما يحتاج إلى النظافة والاحترام.",
+        touch: "🚫 إذا لمسك أحد بطريقة لا ترتاح لها، قل بصوت واضح: 'لا تلمسني!'، ثم اهرب إلى مكان فيه ناس، وأخبر أمي أو أبي أو معلمك فورًا. لا تخف، أنت لست المخطئ."
+    };
+    document.getElementById("showAnswerBtn")?.addEventListener("click", () => {
+        const q = document.getElementById("questionSelect").value;
+        document.getElementById("answerBox").innerHTML = answers[q];
+    });
+
+    // 3. تمرين السلامة
+    document.getElementById("practiceSafetyBtn")?.addEventListener("click", () => {
+        document.getElementById("safetyPractice").innerHTML = "🛡️ قم بتمثيل الموقف مع طفلك: 'تظاهر أن هذا الشخص الغريب يريد أن يأخذك إلى سيارته. ماذا ستفعل؟' درب الطفل على الصراخ 'ساعدوني!' والركض نحو البيت أو المدرسة.";
+    });
+
+    // 4. سيناريوهات
+    const scenarios = [
+        "جارك يطلب منك أن تدخل بيته 'ليعطيك حلوى' دون أن يرى أحد.",
+        "مدرب الرياضة يطلب منك البقاء وحيدًا بعد التمرين 'لمساعدته في تنظيم الأدوات'.",
+        "شخص غريب في الشارع يقول لك 'والدك طلب مني إحضارك إلى المستشفى، تعال معي بسرعة'.",
+        "أحد الأقارب يريد أن يصورك بدون ملابس 'لألبوم العائلة السري'."
+    ];
+    let currentScenario = 0;
+    function updateScenario() {
+        document.getElementById("scenarioText").innerHTML = `📖 ${scenarios[currentScenario]}`;
+        document.getElementById("scenarioAnswer").innerHTML = "";
+    }
+    document.getElementById("nextScenarioBtn")?.addEventListener("click", () => {
+        currentScenario = (currentScenario + 1) % scenarios.length;
+        updateScenario();
+    });
+    document.getElementById("showIdealAnswer")?.addEventListener("click", () => {
+        let answer = "";
+        if (currentScenario === 0) answer = "✅ لا تذهب معه أبدًا. قل 'لا'، ثم اركض إلى منزلك وأخبر والديك.";
+        else if (currentScenario === 1) answer = "✅ ارفض بلطف: 'أمي تنتظرني خارج النادي'، ثم اخرج فورًا وأخبر شخصًا بالغًا تثق به.";
+        else if (currentScenario === 2) answer = "✅ لا تصدق أحدًا يقول إنه من والديك. اطلب منه أن ينتظر واتصل بوالدك للتأكد.";
+        else answer = "✅ ارفض بحزم: 'لا أريد أن أخلع ملابسي'، ثم اخرج من المكان واخبر والديك فورًا.";
+        document.getElementById("scenarioAnswer").innerHTML = answer;
+    });
+    updateScenario();
+
+    // 5. إجراءات الطوارئ
+    document.getElementById("emergencyGuideBtn")?.addEventListener("click", () => {
+        document.getElementById("emergencySteps").innerHTML = "🚨 إذا اشتبهت بحدوث اعتداء جنسي: 1- لا تغسل ملابس الطفل أو جسده (للحفاظ على الأدلة). 2- توجه فورًا إلى أقرب مستشفى أو مركز طبي شرعي. 3- اتصل بالدرك (1055) أو الخط الأخضر 11-11. 4- وفر الدعم النفسي للطفل ولا تلومه أبدًا.";
+    });
+
+    // 6. زر المشاركة (Share API)
+    document.getElementById("shareAppBtn")?.addEventListener("click", () => {
+        if (navigator.share) {
+            navigator.share({
+                title: "SafeKids – حماية أطفال الجزائر",
+                text: "تطبيق مجاني لتعليم الأطفال كيفية حماية أنفسهم من التحرش. أنقذ طفلاً اليوم.",
+                url: window.location.href
+            }).catch(() => alert("شكرًا لمشاركتك التطبيق لحماية الأطفال"));
+        } else {
+            alert("يمكنك نسخ رابط هذا التطبيق وإرساله إلى الأهل والمربين. التطبيق مجاني بالكامل.");
+            navigator.clipboard.writeText(window.location.href);
+            alert("تم نسخ رابط التطبيق. أرسله إلى من تثق به.");
+        }
+    });
+</script>
+</body>
+</html>
